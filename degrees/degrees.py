@@ -91,22 +91,21 @@ def shortest_path(source, target):
 
     If no possible path, returns None.
     """
-    start = Node(state = source, parent= None, action= None)
+    start = Node(state=source, parent=None, action=None)
     target_id = target
     frontier = StackFrontier()
     frontier.add(start)
     explored = set()
     steps = 0
-    
 
     while True:
         # checks to see if the frontier is empty, if is is then there is no solution
         if frontier.empty == True:
             print('frontier empty, no soluiton')
             return False
-        
+
         node = frontier.remove()
-        steps +=1
+        steps += 1
 
         if node.state == target_id:
             print('goal secured')
@@ -123,23 +122,14 @@ def shortest_path(source, target):
             for i in range(len(actions)):
                 path.append((actions[i], cells[i]))
             return path
-        
-        #adding the node state to explored
+
+        # adding the node state to explored
         explored.add(node.state)
 
         for movie_id, person_id in neighbors_for_person(node.state):
             if not frontier.contains_state(person_id) and person_id not in explored:
                 child = Node(state=person_id, parent=node, action=movie_id)
                 frontier.add(child)
-                
-            
-
-
-
-
-
-    # TODO
-    raise NotImplementedError
 
 
 def person_id_for_name(name):
